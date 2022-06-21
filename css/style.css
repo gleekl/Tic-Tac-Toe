@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap');
+
 * {
     box-sizing: border-box;
 }
@@ -28,6 +29,14 @@ header {
     margin: 100px auto;
 }
 
+.x {
+
+}
+
+.o {
+
+}
+
 .row {
     margin: 0;
 }
@@ -47,8 +56,6 @@ header {
     background-color: white;
     cursor: pointer;
 }
-
-
 
 .top {
     border-top: none;
@@ -75,6 +82,7 @@ header {
     border-radius: 10px;
     border-color: black;
     padding: 10px;
+    cursor: pointer;
 }
 
 .replay {
@@ -86,4 +94,5 @@ header {
     border-radius: 10px;
     border-color: black;
     padding: 10px;
+    cursor: pointer;
 }

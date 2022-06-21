@@ -14,9 +14,11 @@
 // When clicked, show O.
 //
 
+// Play & Replay
 const play = document.querySelector('.play')
 const replay = document.querySelector('.replay')
 
+// Cells
 const cellBox = document.querySelectorAll('.cell')
 const topLeft = document.querySelector('#top-left')
 const topMid = document.querySelector('#top-mid')
@@ -28,9 +30,18 @@ const btmLeft = document.querySelector('#btm-left')
 const btmMid = document.querySelector('#btm-mid')
 const btmRight = document.querySelector('#btm-right')
 
-const xClass = 'X';
-const oClass = 'O';
+// X & O image
+const xImg = 'img/X.png';
+const oImg = 'img/O.png';
 
+// X & O classes
+const xClass = 'x';
+const oClass = 'o';
+let oTurn = true; 
+
+
+
+// Show the current class function. 
 const currentClass = () => {
     if (oTurn === true) {
         return oClass;
@@ -39,31 +50,36 @@ const currentClass = () => {
     }
 }
 
+//
 const clickTarget = (event) => {
     const cell = event.target
     
+    console.log('cell clicked');
 }
 
+// Clicking each cell can occur only once. 
 cellBox.forEach(cell => {
-    cell.addEventListener('click', )
+    cell.addEventListener('click', clickTarget, {once: true})
 })
 
+// Test alert function 
 const test = () => {
-    alert("Play button works");
+    alert("Button works");
 }
 
-const makeX = () => {
-    topMid.class
-    return topMid.textContent = 'X';
-}
+// Replay button
+replay.addEventListener('click', test)
 
-const makeO = () => {
-    return topLeft.textContent = 'O'
-}
+// const makeX = () => {
+//     topMid.class
+//     return topMid.textContent = 'X';
+// }
 
-topMid.addEventListener('click', makeX)
-topLeft.addEventListener('click', makeO)
-topMid.addEventListener('click', makeMove)
-topright.addEventListener('click', makeMove)
+// const makeO = () => {
+//     return topLeft.textContent = 'O'
+// }
 
-// play.addEventListener('click', redirect())
+// topMid.addEventListener('click', makeX)
+// topLeft.addEventListener('click', makeO)
+// topMid.addEventListener('click', makeMove)
+// topright.addEventListener('click', makeMove)
