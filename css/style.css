@@ -5,6 +5,7 @@
 
 body {
     width: 100%;
+    margin: 0;
     font-family: 'Montserrat', Courier, monospace;
     text-align: center;
 }
@@ -28,12 +29,13 @@ header {
 }
 
 .row {
-    margin: 5px auto;
+    margin: 0;
 }
 
 .cell {
     width: 150px;
     height: 150px;
+    font-size: 150px;
     margin: 0;
     display: inline-flex;
     align-items: center; 
@@ -41,9 +43,27 @@ header {
     border: 3px;
     border-style: solid;
     border-color: black;
-    border-radius: 5px;
     /* padding: 10px; */
-    background-color: red;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+
+.top {
+    border-top: none;
+}
+
+.left {
+    border-left: none;
+}
+
+.right {
+    border-right: none;
+}
+
+.btm {
+    border-bottom: none;
 }
 
 .play {
@@ -57,4 +77,13 @@ header {
     padding: 10px;
 }
 
-
+.replay {
+    display: inline-block;
+    font-size: 30px;
+    margin: 50px auto;
+    border: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: black;
+    padding: 10px;
+}
