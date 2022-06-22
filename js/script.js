@@ -55,6 +55,33 @@ const swapPlayer = () => {
     }
 }
 
+// Check win function. 
+const isWin = () => {
+    // Loop through each of the winning conditions above.
+    for (let condition of winningConditions) {
+        let c0 = condition[0]
+        let c1 = condition[1]
+        let c2 = condition[2]
+        let cell0 = cells[c0]
+        let cell1 = cells[c1]
+        let cell2 = cells[c2]
+
+        // Condition if all winning conditions are 'x'. If 'x' meets winning conditions, +1 to playerX score, end game to announce that X won.
+        if (cell0.classList.contains('x') && cell1.classList.contains('x') && cell2.classList.contains('x')) {
+            playerXScore += 1
+            endGame(playerX)
+            // console.log('X is the winner!');
+
+        // Condition if all winning conditions are O. If O meets winning conditions, +1 to playerO score, end game to announce that O won.
+        } else if (cell0.classList.contains('o') && cell1.classList.contains('o') && cell2.classList.contains('o')){
+            playerOScore += 1
+            endGame(playerO)
+            // console.log('O is the winner!');
+        }
+    }
+}
+
+
 // When cell is clicked, insert currentPlayer into selected cell, then swap turns. Use event.target.
 const clickTarget = (event) => {
     const cell = event.target;
@@ -85,31 +112,6 @@ const winningConditions = [
     [2, 4, 6]
 ];
 
-// Check win function. 
-const isWin = () => {
-    // Loop through each of the winning conditions above.
-    for (let condition of winningConditions) {
-        let c0 = condition[0]
-        let c1 = condition[1]
-        let c2 = condition[2]
-        let cell0 = cells[c0]
-        let cell1 = cells[c1]
-        let cell2 = cells[c2]
-
-        // Condition if all winning conditions are 'x'. If 'x' meets winning conditions, +1 to playerX score, end game to announce that X won.
-        if (cell0.classList.contains('x') && cell1.classList.contains('x') && cell2.classList.contains('x')) {
-            playerXScore += 1
-            endGame(playerX)
-            // console.log('X is the winner!');
-
-        // Condition if all winning conditions are O. If O meets winning conditions, +1 to playerO score, end game to announce that O won.
-        } else if (cell0.classList.contains('o') && cell1.classList.contains('o') && cell2.classList.contains('o')){
-            playerOScore += 1
-            endGame(playerO)
-            // console.log('O is the winner!');
-        }
-    }
-}
 
 // const updateScore = (winner) => {
 
