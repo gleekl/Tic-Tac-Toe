@@ -31,7 +31,15 @@ const btmLeft = document.querySelector('#btm-left')
 const btmMid = document.querySelector('#btm-mid')
 const btmRight = document.querySelector('#btm-right')
 
-console.log(cells);
+// console.log(cells);
+
+// Players
+const playerX = 'x';
+const playerO = 'o';
+
+// Starting scores
+let playerXScore = 0;
+let playerOScore = 0;
 
 // Starting player
 let currentPlayer = 'x';
@@ -45,23 +53,6 @@ const swapPlayer = () => {
     }
 }
 
-// console.log(swapPlayer());
-// console.log(swapPlayer());
-// console.log(swapPlayer());
-// console.log(swapPlayer());
-
-// // When cell is clicked, insert currentPlayer into selected cell, then swap turns. Use event.target.
-// const clickTarget = (event) => {
-//     const cell = event.target;
-//     // Insert current player's move
-//     const insertMove = (cell, currentPlayer) => {
-//         cell.innerHTML = currentPlayer
-//     }
-//     insertMove(cell, currentPlayer);
-//     swapPlayer();
-//     console.log('cell clicked');
-// }
-
 // When cell is clicked, insert currentPlayer into selected cell, then swap turns. Use event.target.
 const clickTarget = (event) => {
     const cell = event.target;
@@ -71,6 +62,7 @@ const clickTarget = (event) => {
     }
     insertMove(cell, currentPlayer);
     swapPlayer();
+    isWin();
     console.log('cell clicked');
 }
 
@@ -82,48 +74,62 @@ cells.forEach(cell => {
 // Winning condition
 const winningConditions = [
     [0, 1, 2],
-    // [3, 4, 5], 
-    // [6, 7, 8],
-    // [0, 3, 6],
-    // [1, 4, 7],
-    // [2, 5, 8],
-    // [0, 4, 8],
-    // [2, 4, 6]
+    [3, 4, 5], 
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
 ];
 
-// const isWin = () => {
-//     for (let condition of winningConditions) {
-//         let c0 = condition[0]
-//         let c1 = condition[1]
-//         let c2 = condition[2]
-//         let cell0 = cells[c0]
-//         let cell1 = cells[c1]
-//         let cell2 = cells[c2]
-//         const playerX = document.getElementsByClassName.x
-//         const playerO = 
+// Check win function. 
+const isWin = () => {
+    // Loop through each of the winning conditions above.
+    for (let condition of winningConditions) {
+        let c0 = condition[0]
+        let c1 = condition[1]
+        let c2 = condition[2]
+        let cell0 = cells[c0]
+        let cell1 = cells[c1]
+        let cell2 = cells[c2]
 
-//         if (cell0 === cell1 && cell1 === cell2) {
-//             if (cell0 === playerX)
-//         }
-        
-//         console.log(cell0.classList.contains('x'));
-//         console.log(cell1.classList.contains('x'));
-//         console.log(cell2.classList.contains('x'));
-//     }
-// }
-// isWin()
+        // Condition if all winning conditions are 'x'. If 'x' meets winning conditions, +1 to playerX score, end game to announce that X won.
+        if (cell0.classList.contains('x') && cell1.classList.contains('x') && cell2.classList.contains('x')) {
+            playerXScore += 1
+            endGame(playerX)
+            console.log('X is the winner!');
 
-// Test alert function 
-const reset = () => {
+        // Condition if all winning conditions are O. If O meets winning conditions, +1 to playerO score, end game to announce that O won.
+        } else if (cell0.classList.contains('o') && cell1.classList.contains('o') && cell2.classList.contains('o')){
+            playerOScore += 1
+            endGame(playerO)
+            console.log('O is the winner!');
+        }
+    }
+}
+
+// Function to end the game. 
+const endGame = (winningPlayer) => {
+    // Prevent further moves
+    cells.forEach(cell => {
+        cell.removeEventListener('click', clickTarget)
+    })
+
+}
+
+// Restart function 
+const restart = () => {
     cells.forEach(cell => {
         cell.classList.remove('x');
         cell.classList.remove('o');
+        cell.addEventListener('click', clickTarget, {once: true})
     })
+    currentPlayer = 'x';
     console.log('Board reset');
 }
 
-reset()
 
 // Replay button
-replay.addEventListener('click', reset)
+replay.addEventListener('click', restart)
 
