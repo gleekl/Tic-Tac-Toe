@@ -18,8 +18,9 @@
 const play = document.querySelector('.play')
 const replay = document.querySelector('.replay')
 
-// Cells
-const cellBox = document.querySelectorAll('.cell')
+// 
+const board = document.querySelector('.board')
+const cells = document.querySelectorAll('.cell')
 const topLeft = document.querySelector('#top-left')
 const topMid = document.querySelector('#top-mid')
 const topright = document.querySelector('#top-right')
@@ -30,56 +31,99 @@ const btmLeft = document.querySelector('#btm-left')
 const btmMid = document.querySelector('#btm-mid')
 const btmRight = document.querySelector('#btm-right')
 
-// X & O image
-const xImg = 'img/X.png';
-const oImg = 'img/O.png';
+console.log(cells);
 
-// X & O classes
-const xClass = 'x';
-const oClass = 'o';
-let oTurn = true; 
+// Starting player
+let currentPlayer = 'x';
 
-
-
-// Show the current class function. 
-const currentClass = () => {
-    if (oTurn === true) {
-        return oClass;
+// Swap turn
+const swapPlayer = () => {
+    if (currentPlayer === 'x') {
+        return currentPlayer = 'o'
     } else {
-        return xClass;
+        return currentPlayer = 'x'
     }
 }
 
-//
+// console.log(swapPlayer());
+// console.log(swapPlayer());
+// console.log(swapPlayer());
+// console.log(swapPlayer());
+
+// // When cell is clicked, insert currentPlayer into selected cell, then swap turns. Use event.target.
+// const clickTarget = (event) => {
+//     const cell = event.target;
+//     // Insert current player's move
+//     const insertMove = (cell, currentPlayer) => {
+//         cell.innerHTML = currentPlayer
+//     }
+//     insertMove(cell, currentPlayer);
+//     swapPlayer();
+//     console.log('cell clicked');
+// }
+
+// When cell is clicked, insert currentPlayer into selected cell, then swap turns. Use event.target.
 const clickTarget = (event) => {
-    const cell = event.target
-    
+    const cell = event.target;
+    // Insert current player's move
+    const insertMove = (cell, currentPlayer) => {
+        cell.classList.add(currentPlayer)
+    }
+    insertMove(cell, currentPlayer);
+    swapPlayer();
     console.log('cell clicked');
 }
 
 // Clicking each cell can occur only once. 
-cellBox.forEach(cell => {
+cells.forEach(cell => {
     cell.addEventListener('click', clickTarget, {once: true})
 })
 
+// Winning condition
+const winningConditions = [
+    [0, 1, 2],
+    // [3, 4, 5], 
+    // [6, 7, 8],
+    // [0, 3, 6],
+    // [1, 4, 7],
+    // [2, 5, 8],
+    // [0, 4, 8],
+    // [2, 4, 6]
+];
+
+// const isWin = () => {
+//     for (let condition of winningConditions) {
+//         let c0 = condition[0]
+//         let c1 = condition[1]
+//         let c2 = condition[2]
+//         let cell0 = cells[c0]
+//         let cell1 = cells[c1]
+//         let cell2 = cells[c2]
+//         const playerX = document.getElementsByClassName.x
+//         const playerO = 
+
+//         if (cell0 === cell1 && cell1 === cell2) {
+//             if (cell0 === playerX)
+//         }
+        
+//         console.log(cell0.classList.contains('x'));
+//         console.log(cell1.classList.contains('x'));
+//         console.log(cell2.classList.contains('x'));
+//     }
+// }
+// isWin()
+
 // Test alert function 
-const test = () => {
-    alert("Button works");
+const reset = () => {
+    cells.forEach(cell => {
+        cell.classList.remove('x');
+        cell.classList.remove('o');
+    })
+    console.log('Board reset');
 }
 
+reset()
+
 // Replay button
-replay.addEventListener('click', test)
+replay.addEventListener('click', reset)
 
-// const makeX = () => {
-//     topMid.class
-//     return topMid.textContent = 'X';
-// }
-
-// const makeO = () => {
-//     return topLeft.textContent = 'O'
-// }
-
-// topMid.addEventListener('click', makeX)
-// topLeft.addEventListener('click', makeO)
-// topMid.addEventListener('click', makeMove)
-// topright.addEventListener('click', makeMove)
