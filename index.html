@@ -1,3 +1,19 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>Tic-Tac-Toe</header>
+    <div class="play"><a href="tic-tac-toe.html"></a> PLAY</div>
+    <script src="js/script.js"></script>
+</body>
+</html> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +25,29 @@
 </head>
 <body>
     <header>Tic-Tac-Toe</header>
-    <div class="play">PLAY</div>
+
+    <div class="score score-x">Player X Score: 0</div>
+    <div class="score score-o">Player O Score: 0</div>
+
+    <div class="board">
+        <div class="row top">
+            <div class="cell top left" id="top-left"></div>
+            <div class="cell top mid" id="top-mid"></div>
+            <div class="cell top right" id="top-right"></div>
+        </div>
+        <div class="row mid">
+            <div class="cell mid left" id="mid-left"></div>
+            <div class="cell mid mid" id="mid-mid"></div>
+            <div class="cell mid right" id="mid-right"></div>
+        </div>
+        <div class="row bot">
+            <div class="cell btm left" id="btm-left"></div>
+            <div class="cell btm mid" id="btm-mid"></div>
+            <div class="cell btm right" id="btm-right"></div>
+        </div>
+    </div>
+    <div class="win-message"></div>
+    <div class="replay">REPLAY</div>
     <script src="js/script.js"></script>
 </body>
 </html>
