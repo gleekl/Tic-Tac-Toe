@@ -9,6 +9,8 @@ body {
     margin: 0;
     font-family: 'Montserrat', Courier, monospace;
     text-align: center;
+    background-color: #4C3A51;
+    color: #E7AB79;
 }
 
 header {
@@ -21,11 +23,15 @@ header {
     border: 2px;
     border-style: solid;
     border-radius: 10px;
-    border-color: black;
+    border-color: #E7AB79;
     padding: 10px;
 }
 
-.game-board {
+.score-x {
+
+}
+
+.board {
     margin: 100px auto;
 }
 
@@ -57,10 +63,26 @@ header {
     justify-content: center;
     border: 3px;
     border-style: solid;
-    border-color: black;
+    border-color: #B25068;
     /* padding: 10px; */
-    background-color: white;
+    background-color: #774360;
     cursor: pointer;
+}
+
+#top-left {
+    border-radius: 35px 0 0 0;
+}
+
+#top-right {
+    border-radius: 0 35px 0 0;
+}
+
+#btm-left {
+    border-radius: 0 0 0 35px;
+}
+
+#btm-right {
+    border-radius: 0 0 35px 0;
 }
 
 .cell:hover {
@@ -95,6 +117,12 @@ header {
     cursor: pointer;
 }
 
+.win-message {
+    margin: 50px auto;
+    font-size: 30px;
+    opacity: 0;
+}
+
 .replay {
     display: inline-block;
     font-size: 30px;
@@ -102,11 +130,11 @@ header {
     border: 2px;
     border-style: solid;
     border-radius: 10px;
-    border-color: black;
+    border-color: #E7AB79;
     padding: 10px;
     cursor: pointer;
 }
 
 .replay:hover {
-    background-color: red;
+    background-color: #B25068;
 }

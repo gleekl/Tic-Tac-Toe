@@ -18,7 +18,7 @@
 const play = document.querySelector('.play')
 const replay = document.querySelector('.replay')
 
-// 
+// Board and cells
 const board = document.querySelector('.board')
 const cells = document.querySelectorAll('.cell')
 const topLeft = document.querySelector('#top-left')
@@ -31,15 +31,17 @@ const btmLeft = document.querySelector('#btm-left')
 const btmMid = document.querySelector('#btm-mid')
 const btmRight = document.querySelector('#btm-right')
 
-// console.log(cells);
+// Win message
+const winText = document.querySelector('.win-message')
 
 // Players
-const playerX = 'x';
-const playerO = 'o';
+const playerX = 'X';
+const playerO = 'O';
 
 // Starting scores
 let playerXScore = 0;
 let playerOScore = 0;
+let tieScore = 0;
 
 // Starting player
 let currentPlayer = 'x';
@@ -98,16 +100,20 @@ const isWin = () => {
         if (cell0.classList.contains('x') && cell1.classList.contains('x') && cell2.classList.contains('x')) {
             playerXScore += 1
             endGame(playerX)
-            console.log('X is the winner!');
+            // console.log('X is the winner!');
 
         // Condition if all winning conditions are O. If O meets winning conditions, +1 to playerO score, end game to announce that O won.
         } else if (cell0.classList.contains('o') && cell1.classList.contains('o') && cell2.classList.contains('o')){
             playerOScore += 1
             endGame(playerO)
-            console.log('O is the winner!');
+            // console.log('O is the winner!');
         }
     }
 }
+
+// const updateScore = (winner) => {
+
+// }
 
 // Function to end the game. 
 const endGame = (winningPlayer) => {
@@ -116,7 +122,15 @@ const endGame = (winningPlayer) => {
         cell.removeEventListener('click', clickTarget)
     })
 
+    // Show the win message
+    winText.style.opacity = 1
+    winText.textContent = `Player ${winningPlayer} wins!`
 }
+
+// winText.innerHTML = `Player so-so wins!`
+
+// .innerHTML = `Player X Score: ${playerXScore}`
+// .innerHTML = `Player O Score: ${playerOScore}`
 
 // Restart function 
 const restart = () => {
@@ -126,9 +140,9 @@ const restart = () => {
         cell.addEventListener('click', clickTarget, {once: true})
     })
     currentPlayer = 'x';
+    winText.style.opacity = 0
     console.log('Board reset');
 }
-
 
 // Replay button
 replay.addEventListener('click', restart)
