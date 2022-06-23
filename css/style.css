@@ -50,7 +50,9 @@ header {
 
 .round {
     font-size: 40px;
-    margin: 0 325px;
+    margin: 0 auto;
+    width: 250px;
+    justify-content: center;
     border: 2px;
     border-style: solid;
     border-radius: 10px;

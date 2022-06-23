@@ -143,9 +143,10 @@ const start = () => {
         cell.addEventListener('click', clickTarget, {once: true});
     })
 
-    updateRound();
+    updateRound();                          // Increase the round number.
 
     currentPlayer = 'x';                    // Reset current player to X.
+
     neonBlink.style.animation = "none";     // Turn off header flicker animation every start.
 
     winText.style.opacity = 1;              // Hide win message.
@@ -154,12 +155,14 @@ const start = () => {
 
     play.textContent = 'REPLAY';            // Change 'PLAY' to 'REPLAY'.
     play.style.width = '225px';             // Auto increase 'REPLAY' width.
+
     console.log('Board reset');
 }
 
 // Play/Replay button
 play.addEventListener('click', start);
 
+// Reset game function to reset page without refreshing page.
 const resetGame = () => {
     currentPlayer = 'x';
     cells.forEach(cell => {
@@ -168,17 +171,20 @@ const resetGame = () => {
         cell.removeEventListener('click', clickTarget);
     })
 
-    round.textContent = 0
-    xScore.textContent = 0
-    oScore.textContent = 0
+    roundNumber = 0;                                    // Reset the JS round num.
+    round.textContent = 0;                              // Reset the HTML round num.
 
-    neonBlink.style.animation = 'flicker 1s infinite alternate';
+    xScore.textContent = 0;                             // Reset Player X Score.
+    oScore.textContent = 0;                             // Reset Player O Score.
 
-    winText.style.animation = 'fade 5s infinite';
-    winText.textContent = 'PRESS PLAY TO START';
+    neonBlink.style.animation = 'flicker 1s infinite alternate';    // Turn header animation back on
 
-    play.textContent = 'PLAY';
-    play.style.width = '200px';
+    winText.style.animation = 'fade 5s infinite';       // Turn message animation back on.
+    winText.textContent = 'PRESS PLAY TO START';        // Reset message.
+
+    play.textContent = 'PLAY';                          // Reset replay button to play.
+    play.style.width = '200px';                         // Reset play button border width.
 }
 
+// Reset button
 reset.addEventListener('click', resetGame)
