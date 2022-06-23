@@ -18,9 +18,11 @@ const btmRight = document.querySelector('#btm-right');
 
 // Header neon blink
 const neonBlink = document.querySelector('.neon-blink');
+let neonAnimation = neonBlink.style.animation
 
 // Win message
 const winText = document.querySelector('.win-message');
+let winAnimation = winText.style.animation
 
 // Players
 const playerX = 'X';
@@ -142,17 +144,12 @@ const start = () => {
         cell.classList.remove('o');
         cell.addEventListener('click', clickTarget, {once: true});
     })
-
     updateRound();                          // Increase the round number.
-
     currentPlayer = 'x';                    // Reset current player to X.
-
-    neonBlink.style.animation = "none";     // Turn off header flicker animation every start.
-
+    neonBlink.style.animation = 'none';     // Turn off header flicker animation every start.
+    winText.style.animation = 'none';       // Stop the flashing message text animation
     winText.style.opacity = 1;              // Hide win message.
-    winText.style.animation = "none";       // Stop the flashing message text animation
-    winText.textContent = "X to start.";    // Prompt player X to start.
-
+    winText.textContent = 'X to start.';    // Prompt player X to start.
     play.textContent = 'REPLAY';            // Change 'PLAY' to 'REPLAY'.
     play.style.width = '225px';             // Auto increase 'REPLAY' width.
 
@@ -170,18 +167,13 @@ const resetGame = () => {
         cell.classList.remove('o');
         cell.removeEventListener('click', clickTarget);
     })
-
     roundNumber = 0;                                    // Reset the JS round num.
     round.textContent = 0;                              // Reset the HTML round num.
-
     xScore.textContent = 0;                             // Reset Player X Score.
     oScore.textContent = 0;                             // Reset Player O Score.
-
     neonBlink.style.animation = 'flicker 1s infinite alternate';    // Turn header animation back on
-
     winText.style.animation = 'fade 5s infinite';       // Turn message animation back on.
     winText.textContent = 'PRESS PLAY TO START';        // Reset message.
-
     play.textContent = 'PLAY';                          // Reset replay button to play.
     play.style.width = '200px';                         // Reset play button border width.
 }

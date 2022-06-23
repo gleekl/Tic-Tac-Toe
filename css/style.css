@@ -30,6 +30,7 @@ header {
 
 .neon-blink {
     animation: flicker 1s infinite alternate;
+    cursor: pointer;
 }
 
 @keyframes flicker {
@@ -201,9 +202,5 @@ header {
 
     .board {
         margin: 20px auto;
-    }
-
-    .play {
-        width: 100px;
     }
 }
