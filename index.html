@@ -24,10 +24,10 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>Tic-Tac-Toe</header>
+    <header>Tic-Tac-<span class="neon-blink">Toe</span></header>
 
-    <div class="score score-x">Player X Score: 0</div>
-    <div class="score score-o">Player O Score: 0</div>
+    <div class="score">Player X Score: <span class="score-x">0</span></div>
+    <div class="score">Player O Score: <span class="score-o">0</span></div>
 
     <div class="board">
         <div class="row top">
@@ -46,8 +46,10 @@
             <div class="cell btm right" id="btm-right"></div>
         </div>
     </div>
-    <div class="win-message"></div>
-    <div class="replay">REPLAY</div>
+
+    <div class="win-message">PRESS PLAY TO START</div>
+    <div class="play">PLAY</div>
+
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&family=Nixie+One&display=swap');
 
 * {
     box-sizing: border-box;
@@ -14,12 +14,43 @@ body {
 }
 
 header {
+    font-family: 'Nixie One', Courier, monospace;
     font-size: 75px;
+    margin: 30px auto;
+    color: #ffffff;
+    text-shadow: 
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 30px #E7AB79,
+        0 0 50px #E7AB79,
+        0 0 60px #E7AB79,
+        0 0 70px #E7AB79,
+        0 0 80px #E7AB79;
+}
+
+.neon-blink {
+    animation: flicker 1s infinite alternate;
+}
+
+@keyframes flicker {
+    0%, 20%, 26%, 30%, 67%, 100% {
+        text-shadow: 
+            0 0 10px #fff,
+            0 0 21px #fff,
+            0 0 30px #E7AB79,
+            0 0 50px #E7AB79,
+            0 0 60px #E7AB79,
+            0 0 70px #E7AB79,
+            0 0 80px #E7AB79;
+    }
+    25%, 27%, 40% {
+        text-shadow: none;
+    }
 }
 
 .score {
     display: inline-block;
-    margin: 50px 100px;
+    margin: 50px 35px;
     border: 2px;
     border-style: solid;
     border-radius: 10px;
@@ -33,20 +64,21 @@ header {
 
 .board {
     margin: 100px auto;
+    width: 90%;
 }
 
 .x {
     background-image: url(../img/X.png);
     background-position: center;
-    background-size: 70%;
-    background-repeat:no-repeat;
+    background-size: 60%;
+    background-repeat: no-repeat;
 }
 
 .o {
     background-image: url(../img/O.png);
     background-position: center;
-    background-size: 80%;
-    background-repeat:no-repeat;
+    background-size: 75%;
+    background-repeat: no-repeat;
 }
 
 .row {
@@ -54,9 +86,8 @@ header {
 }
 
 .cell {
-    width: 150px;
-    height: 150px;
-    font-size: 150px;
+    width: 120px;
+    height: 120px;
     margin: 0;
     display: inline-flex;
     align-items: center; 
@@ -69,24 +100,24 @@ header {
     cursor: pointer;
 }
 
+.cell:hover {
+    background-color: #E7AB79;
+}
+
 #top-left {
-    border-radius: 35px 0 0 0;
+    border-radius: 30px 0 0 0;
 }
 
 #top-right {
-    border-radius: 0 35px 0 0;
+    border-radius: 0 30px 0 0;
 }
 
 #btm-left {
-    border-radius: 0 0 0 35px;
+    border-radius: 0 0 0 30px;
 }
 
 #btm-right {
-    border-radius: 0 0 35px 0;
-}
-
-.cell:hover {
-    background-color: rgb(218, 218, 218);
+    border-radius: 0 0 30px 0;
 }
 
 .top {
@@ -106,21 +137,35 @@ header {
 }
 
 .play {
-    display: inline-block;
-    font-size: 30px;
-    margin: 50px auto;
+    display: flex;
+    width: 200px;
+    justify-content: center;
+    font-size: 50px;
+    margin: 20px auto;
     border: 2px;
     border-style: solid;
     border-radius: 10px;
-    border-color: black;
+    border-color: #E7AB79;
     padding: 10px;
     cursor: pointer;
 }
 
+.play:hover {
+    box-shadow: 0 0 10px #fff;
+    text-shadow: 
+        0 0 3px #fff,
+        0 0 15px #E7AB79;
+}
+
 .win-message {
-    margin: 50px auto;
+    animation: fade 5s infinite;
+    margin: 20px auto;
     font-size: 30px;
-    opacity: 0;
+}
+
+@keyframes fade {
+    0%, 100% { opacity: 0;}
+    50% { opacity: 1;}
 }
 
 .replay {
@@ -136,12 +181,12 @@ header {
 }
 
 .replay:hover {
-    background-color: #B25068;
+    box-shadow: 0 0 10px #fff;
 }
 
 @media only screen and (max-width: 600px) {
     .body {
-        width: 70%
+        width: 70%;
     }
     
 }

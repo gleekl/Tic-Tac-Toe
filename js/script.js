@@ -1,19 +1,3 @@
-// What technologies will it use?
-// HTML
-// CSS
-// JavaScript
-
-// What are the base features in tic-tac-toe?
-// Board. 3x3 grid. Maybe 4x4? 5x5? How many adjustments can you make?
-// 2 players -> Either PvP or PvAI (AI difficulty modes?)
-// 2 avatars. X vs O. (Customisable?)
-// Live score. Who has won how many rounds? 
-// 
-
-// When clicked, show X. 
-// When clicked, show O.
-//
-
 // Play & Replay
 const play = document.querySelector('.play')
 const replay = document.querySelector('.replay')
@@ -31,6 +15,9 @@ const btmLeft = document.querySelector('#btm-left')
 const btmMid = document.querySelector('#btm-mid')
 const btmRight = document.querySelector('#btm-right')
 
+// Header neon blink
+const neonBlink = document.querySelector('.neon-blink')
+
 // Win message
 const winText = document.querySelector('.win-message')
 
@@ -39,6 +26,8 @@ const playerX = 'X';
 const playerO = 'O';
 
 // Starting scores
+const xScore = document.querySelector('.score-x')
+const oScore = document.querySelector('.score-o')
 let playerXScore = 0;
 let playerOScore = 0;
 let tieScore = 0;
@@ -49,9 +38,22 @@ let currentPlayer = 'x';
 // Swap turn
 const swapPlayer = () => {
     if (currentPlayer === 'x') {
+        winText.textContent = "O's turn."
         return currentPlayer = 'o'
     } else {
+        winText.textContent = "X's turn."
         return currentPlayer = 'x'
+    }
+}
+
+// updateScore function. Placed in isWin() below.
+const updateScore = (winner) => {
+    if (winner === 'x') {
+        playerXScore += 1
+        return xScore.textContent = `${playerXScore}`
+    } else if (winner === 'o') {
+        playerOScore += 1
+        return oScore.textContent = `${playerOScore}`
     }
 }
 
@@ -68,17 +70,22 @@ const isWin = () => {
 
         // Condition if all winning conditions are 'x'. If 'x' meets winning conditions, +1 to playerX score, end game to announce that X won.
         if (cell0.classList.contains('x') && cell1.classList.contains('x') && cell2.classList.contains('x')) {
-            playerXScore += 1
+            updateScore('x')
             endGame(playerX)
-            // console.log('X is the winner!');
 
         // Condition if all winning conditions are O. If O meets winning conditions, +1 to playerO score, end game to announce that O won.
         } else if (cell0.classList.contains('o') && cell1.classList.contains('o') && cell2.classList.contains('o')){
-            playerOScore += 1
+            updateScore('o')
             endGame(playerO)
             // console.log('O is the winner!');
         }
+
+
     }
+}
+
+const isDraw = () => {
+
 }
 
 
@@ -95,12 +102,7 @@ const clickTarget = (event) => {
     console.log('cell clicked');
 }
 
-// Clicking each cell can occur only once. 
-cells.forEach(cell => {
-    cell.addEventListener('click', clickTarget, {once: true})
-})
-
-// Winning condition
+// Winning conditions. 3 rows, 3 columns, and 2 diagonals.
 const winningConditions = [
     [0, 1, 2],
     [3, 4, 5], 
@@ -112,40 +114,34 @@ const winningConditions = [
     [2, 4, 6]
 ];
 
-
-// const updateScore = (winner) => {
-
-// }
-
 // Function to end the game. 
 const endGame = (winningPlayer) => {
     // Prevent further moves
     cells.forEach(cell => {
         cell.removeEventListener('click', clickTarget)
     })
-
     // Show the win message
     winText.style.opacity = 1
     winText.textContent = `Player ${winningPlayer} wins!`
 }
 
-// winText.innerHTML = `Player so-so wins!`
-
-// .innerHTML = `Player X Score: ${playerXScore}`
-// .innerHTML = `Player O Score: ${playerOScore}`
-
-// Restart function 
-const restart = () => {
+// Start function 
+const start = () => {
+    // Initiate click eventListener. Cannot click until PLAY button is clicked. Click event can only occur once per cell.
     cells.forEach(cell => {
         cell.classList.remove('x');
         cell.classList.remove('o');
         cell.addEventListener('click', clickTarget, {once: true})
     })
-    currentPlayer = 'x';
-    winText.style.opacity = 0
+    neonBlink.style.animation = "none";     // Turn off header flicker animation every start.
+    currentPlayer = 'x';                    // Reset current player to X.
+    winText.style.opacity = 0;              // Hide win message.
+    winText.textContent = "X to start."     // Prompt player X to start.
+    play.textContent = 'REPLAY';            // Change 'PLAY' to 'REPLAY'.
+    play.style.width = '225px'              // Auto increase 'REPLAY' width.
     console.log('Board reset');
 }
 
-// Replay button
-replay.addEventListener('click', restart)
+// Play/Replay button
+play.addEventListener('click', start)
 
