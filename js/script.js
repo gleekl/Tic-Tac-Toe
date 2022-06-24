@@ -6,23 +6,6 @@ const reset = document.querySelector('.reset');
 // Board and cells
 const board = document.querySelector('.board');
 const cells = document.querySelectorAll('.cell');
-const topLeft = document.querySelector('#top-left');
-const topMid = document.querySelector('#top-mid');
-const topright = document.querySelector('#top-right');
-const midLeft = document.querySelector('#mid-left');
-const midMid = document.querySelector('#mid-mid');
-const midRight = document.querySelector('#mid-right');
-const btmLeft = document.querySelector('#btm-left');
-const btmMid = document.querySelector('#btm-mid');
-const btmRight = document.querySelector('#btm-right');
-
-// Header neon blink
-const neonBlink = document.querySelector('.neon-blink');
-let neonAnimation = neonBlink.style.animation
-
-// Win message
-const winText = document.querySelector('.win-message');
-let winAnimation = winText.style.animation
 
 // Players
 const playerX = 'X';
@@ -41,6 +24,14 @@ let tieScore = 0;
 
 // Starting player
 let currentPlayer = 'x';
+
+// Header neon blink
+const neonBlink = document.querySelector('.neon-blink');
+let neonAnimation = neonBlink.style.animation
+
+// Win message
+const winText = document.querySelector('.win-message');
+let winAnimation = winText.style.animation
 
 // Swap turn
 const swapPlayer = () => {
@@ -83,7 +74,7 @@ const winningConditions = [
 ];
 
 // Check win function. 
-const isWin = () => {
+const checkWin = () => {
     // Loop through each of the winning conditions above.
     for (let condition of winningConditions) {
         let c0 = condition[0];
@@ -93,22 +84,30 @@ const isWin = () => {
         let cell1 = cells[c1];
         let cell2 = cells[c2];
 
-        // Condition if all winning conditions are 'x'. If 'x' meets winning conditions, +1 to playerX score, end game to announce that X won.
+        // Condition if all winning conditions are X. If X meets winning conditions, +1 to playerX score, end game to announce that X won.
         if (cell0.classList.contains('x') && cell1.classList.contains('x') && cell2.classList.contains('x')) {
             updateScore('x');
-            endGame(playerX);
+            return endGame('Player X wins.');
         }
         // Condition if all winning conditions are O. If O meets winning conditions, +1 to playerO score, end game to announce that O won.
         else if (cell0.classList.contains('o') && cell1.classList.contains('o') && cell2.classList.contains('o')){
             updateScore('o');
-            endGame(playerO);
+            return endGame("Player O wins");
         }
+    } 
+    if (allContainsXO()) {
+        return endGame("It's a tie!");
     }
 }
 
-// const isDraw = () => {
-
-// }
+const allContainsXO = () => {
+    for (let cell of cells) {
+        if (!cell.classList.contains('x') && !cell.classList.contains('o')){
+          return false
+        }
+    }
+    return true
+}
 
 // When cell is clicked, insert currentPlayer into selected cell, then swap turns. Use event.target.
 const clickTarget = (event) => {
@@ -119,13 +118,12 @@ const clickTarget = (event) => {
     }
     insertMove(cell, currentPlayer);
     swapPlayer();
-    isWin();
-    // isDraw();
+    checkWin();
     console.log('cell clicked');
 }
 
-// Function to end the game. 
-const endGame = (winningPlayer) => {
+// End the game. 
+const endGame = (msg) => {
     // Prevent further moves
     cells.forEach(cell => {
         cell.removeEventListener('click', clickTarget);
@@ -133,7 +131,7 @@ const endGame = (winningPlayer) => {
 
     // Show the win message
     winText.style.opacity = 1;
-    winText.textContent = `Player ${winningPlayer} wins!`;
+    winText.textContent = msg;
 }
 
 // Start function
