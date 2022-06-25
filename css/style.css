@@ -195,12 +195,53 @@ header {
     background-color: #B25068;
 }
 
-@media only screen and (max-width: 600px) {
-    .body {
-        width: 70%;
+@media only screen and (min-width: 320px) {
+    header {
+        font-size: 50px;
+        margin: 20px auto;
+    }
+
+    .round {
+        font-size: 25px;
+        margin: 15px auto;
+        width: 150px;
+        padding: 5px;
+    }
+
+    .score {
+        display: inline-block;
+        margin: 10px auto;
+        border: 2px;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: #E7AB79;
+        padding: 5px;
     }
 
     .board {
-        margin: 20px auto;
+        margin: 25px auto;
+        width: 100%;
     }
+
+    .cell {
+        width: 90px;
+        height: 90px;
+        margin: 0;
+        display: inline-flex;
+        align-items: center; 
+        justify-content: center;
+    }
+
+    .win-message {
+        margin: 20px auto;
+        font-size: 20px;
+    }
+
+    .play {
+        width: 150px;
+        font-size: 35px;
+        margin: 10px auto;
+        padding: 3px;
+    }
+
 }
