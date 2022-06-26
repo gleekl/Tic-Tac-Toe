@@ -10,6 +10,7 @@ const cells = document.querySelectorAll('.cell');
 // Players
 const playerX = 'X';
 const playerO = 'O';
+let ai = false
 
 // Round number
 const round = document.querySelector('.round-number')
@@ -59,6 +60,7 @@ const updateScore = (winner) => {
         playerOScore++;
         return oScore.textContent = `${playerOScore}`;
     }
+    return 
 }
 
 // Winning conditions. 3 rows, 3 columns, and 2 diagonals.
@@ -128,7 +130,6 @@ const endGame = (msg) => {
     cells.forEach(cell => {
         cell.removeEventListener('click', clickTarget);
     })
-
     // Show the win message
     winText.style.opacity = 1;
     winText.textContent = msg;
@@ -144,14 +145,13 @@ const start = () => {
     })
     updateRound();                          // Increase the round number.
     currentPlayer = 'x';                    // Reset current player to X.
-    neonBlink.style.animation = 'none';     // Turn off header flicker animation every start.
-    winText.style.animation = 'none';       // Stop the flashing message text animation
+    neonBlink.style.animation = 'none';     // Turn off header flicker animation.
+    winText.style.animation = 'none';       // Stop the flashing message text animation.
     winText.style.opacity = 1;              // Hide win message.
     winText.textContent = 'X to start.';    // Prompt player X to start.
     play.textContent = 'REPLAY';            // Change 'PLAY' to 'REPLAY'.
     play.style.width = '225px';             // Auto increase 'REPLAY' width.
-
-    console.log('Board reset');
+    console.log('Game started.');
 }
 
 // Play/Replay button
@@ -174,7 +174,37 @@ const resetGame = () => {
     winText.textContent = 'PRESS PLAY TO START';        // Reset message.
     play.textContent = 'PLAY';                          // Reset replay button to play.
     play.style.width = '200px';                         // Reset play button border width.
+    console.log('Game reset.');
 }
 
 // Reset button
 reset.addEventListener('click', resetGame)
+
+// AI Function
+const aiTurn = () => {
+    if (ai === true) {
+        return randomCell()
+    }
+}
+
+const availableCells = () => {
+    let availableCellsArray = []
+    for (let cell of cells) {
+        if (!cell.classList.contains('x') && !cell.classList.contains('o')) {
+            availableCellsArray.push(cell.dataset.index)
+        }
+    }
+    return availableCellsArray
+}
+
+const randomCell = () => {
+    let open = availableCells()
+    let random = Math.floor(Math.random() * open.length)
+    let chosenArray = open[random]
+    let decision = returnCell(chosenArray)
+    return decision
+}
+
+// Sidebar
+const dh = document.querySelector('.d-h')
+

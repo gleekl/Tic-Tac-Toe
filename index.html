@@ -24,7 +24,20 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="neon-buzz">Tic-Tac-<span class="neon-blink">Toe</span></header>
+    <div class="sidebar">
+        <div class="sidebar-title">
+            <div class="ai-toggle">Player: On</div>
+            <div class="themes">Themes</div>
+                <ul>
+                    <li class="theme-button" id="sunset">Sunset Halloween</li>
+                    <li class="theme-button" id="rainbow">Neon Rainbow</li>
+                    <li class="theme-button" id="winter">Neon Winter</li>
+                    <li class="theme-button" id="space">Neon Space</li>
+                </ul>
+        </div> 
+    </div>
+
+    <div class="header neon-buzz">Tic-Tac-<span class="neon-blink">Toe</span></div>
 
     <div class="round">Round <span class="round-number">0</span></div>
     <div class="score">Player X Score: <span class="score-x">0</span></div>
@@ -53,5 +66,6 @@
     <div class="reset">reset</div>
 
     <script src="js/script.js"></script>
+    <script src="js/themes.js"></script>
 </body>
 </html>
